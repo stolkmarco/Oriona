@@ -1,4 +1,22 @@
 'use client'
 import { useEffect, useState } from 'react'
-const SRC='https://copilotstudio.microsoft.com/environments/66d77e32-ba12-ed48-8cac-2c2a85f015ac/bots/cr81c_businessDevelopmentAssist/webchat?__version__=2'
-export default function CopilotWidget(){ const [open,setOpen]=useState(false); const [failed,setFailed]=useState(false); useEffect(()=>{ const s=typeof window!=='undefined'?localStorage.getItem('oriona-copilot-open'):null; if(s===null) setOpen(true); else setOpen(s==='1') },[]); useEffect(()=>{ if(typeof window!=='undefined') localStorage.setItem('oriona-copilot-open', open?'1':'0') },[open]); return (<div className="fixed z-[9999] bottom-4 right-4">{open && (<div className="mb-3 w-[380px] max-w-[96vw] h-[600px] max-h-[70vh] rounded-2xl overflow-hidden ring-1 ring-black/10 dark:ring-white/10 bg-white dark:bg-[#0f1220] shadow-2xl widget-hover">{failed ? (<div className="h-full w-full grid place-items-center p-6 text-center"><div><div className="text-sm opacity-60">Couldn’t load Copilot in an iframe.</div><a className="inline-flex mt-3 px-3 py-2 rounded-lg ring-1 ring-black/10 dark:ring-white/10 btn-hover btn-glow bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10" href={SRC} target="_blank" rel="noopener noreferrer">Open Copilot in a new tab ↗</a></div></div>) : (<iframe src={SRC} title="Copilot" className="w-full h-full" frameBorder={0} allow="clipboard-read; clipboard-write; microphone; camera" onError={()=>setFailed(true)} />)}</div>)}<button onClick={()=>setOpen(!open)} className="btn-hover btn-glow rounded-full px-4 py-3 ring-1 ring-black/10 dark:ring-white/10 bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 flex items-center gap-2" aria-label="Toggle Copilot"><span role="img" aria-hidden>💬</span><span className="text-sm font-medium">{open?'Hide chat':'Chat'}</span></button></div>) }
+import CopilotWebChat from './CopilotWebChat'
+import { useTheme } from './TTheme'
+
+export default function CopilotWidget(){
+  const [open,setOpen] = useState(false)
+  const { theme } = useTheme()
+  useEffect(()=>{ const s=typeof window!=='undefined'?localStorage.getItem('oriona-copilot-open'):null; if(s===null) setOpen(true); else setOpen(s==='1') },[])
+  useEffect(()=>{ if(typeof window!=='undefined') localStorage.setItem('oriona-copilot-open', open?'1':'0') },[open])
+  return (
+    <div className='fixed z-[9999] bottom-4 right-4'>
+      {open && (
+        <div className='mb-3 w-[380px] max-w-[96vw] h-[600px] max-h-[70vh] rounded-2xl overflow-hidden ring-1 ring-white/10 bg-[#0f1220] shadow-2xl'>
+          <div className='h-2 bg-gradient-to-r from-[#4d3293] to-[#780096]' />
+          <CopilotWebChat theme={theme} />
+        </div>
+      )}
+      <button onClick={()=>setOpen(!open)} className='btn bg-black/10 dark:bg-white/10'>💬 {open?'Hide chat':'Chat'}</button>
+    </div>
+  )
+}

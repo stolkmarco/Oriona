@@ -1,12 +1,1 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root { --tp-slate:#0b0d16; --tp-indigoDark:#3e2666; --tp-indigo:#4d3293; --tp-purple:#780096; }
-html,body{height:100%}
-body { @apply bg-zinc-50 text-zinc-900; }
-.dark body { @apply bg-[var(--tp-slate)] text-white; }
-.btn-hover { @apply transform duration-200 hover:scale-105; }
-.btn-glow:hover { box-shadow: 0 0 30px rgba(102,72,204,0.45); }
-.widget-hover { @apply transition-transform duration-200 hover:-translate-y-0.5; }
-.widget-hover:hover { box-shadow: 0 0 24px rgba(102,72,204,0.35); }
+@tailwind base;@tailwind components;@tailwind utilities;body{@apply bg-zinc-50 text-zinc-900 dark:bg-[#0f1220] dark:text-white} .btn{ @apply inline-flex items-center gap-2 px-3 py-2 rounded-lg ring-1 ring-black/10 dark:ring-white/10 hover:opacity-90 transition }
