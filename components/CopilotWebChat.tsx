@@ -1,10 +1,12 @@
 'use client'
 import { useEffect, useMemo, useState } from 'react'
 import ReactWebChat, { createDirectLine } from 'botframework-webchat'
+import { getRegionalSettingsURL } from './utils/webchat'
 
 const TOKEN_ENDPOINT = process.env.NEXT_PUBLIC_PVA_TOKEN_ENDPOINT || '/api/pva-directline/token'
 
-function getRegionalSettingsURL(tokenEndpoint: string){
+/* moved to utils/webchat */
+function __old_removed__(
   const env = tokenEndpoint.slice(0, tokenEndpoint.indexOf('/powervirtualagents'))
   const apiVersion = tokenEndpoint.slice(tokenEndpoint.indexOf('api-version')).split('=')[1]
   return `${env}/powervirtualagents/regionalchannelsettings?api-version=${apiVersion}`
