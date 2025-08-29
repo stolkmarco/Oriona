@@ -1,6 +1,6 @@
 {
-  "name": "oriona-next",
-  "version": "1.2.0",
+  "name": "oriona",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "14.2.5",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "lucide-react": "^0.441.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",

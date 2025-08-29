@@ -1,1 +1,31 @@
-@tailwind base;@tailwind components;@tailwind utilities;body{@apply bg-zinc-50 text-zinc-900 dark:bg-[#0f1220] dark:text-white}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tp-indigo: #4D3293;
+  --tp-violet: #780096;
+}
+
+html, body { height: 100%; }
+body { @apply bg-zinc-50 text-zinc-900 transition-colors duration-300; }
+.dark body { @apply bg-[#0f1220] text-white; }
+
+/* Glow + zoom utilities */
+.card-hover {
+  @apply transition-transform duration-200 ease-out will-change-transform;
+}
+.card-hover:hover { transform: translateY(-2px) scale(1.02); }
+.glow {
+  box-shadow: 0 10px 30px rgba(102,72,204,0.25), 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.widget-hover { transition: box-shadow .2s ease, transform .2s ease; }
+.widget-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(102,72,204,0.25);
+}
+
+/* Scrollbars subtle */
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 8px; }
+.light *::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); }
