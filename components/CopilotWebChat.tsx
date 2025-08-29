@@ -4,9 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { getRegionalSettingsURL } from './utils/webchat';
 
 declare global {
-  interface Window {
-    WebChat?: any;
-  }
+  interface Window { WebChat?: any }
 }
 
 const TOKEN_ENDPOINT = (process.env.NEXT_PUBLIC_PVA_TOKEN_ENDPOINT as string) || '/api/pva-directline/token';
@@ -19,13 +17,12 @@ export default function CopilotWebChat({ theme = 'dark' as 'light' | 'dark' }) {
   const [ready, setReady] = useState(false);
   const [err, setErr] = useState<string>();
 
-  // Load Web Chat CDN bundle on the client
+  // Load Web Chat CDN bundle
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (window.WebChat) { setReady(true); return; }
     const s = document.createElement('script');
-    s.src = WEBCHAT_CDN;
-    s.async = true;
+    s.src = WEBCHAT_CDN; s.async = true;
     s.onload = () => setReady(true);
     s.onerror = () => setErr('Failed to load Web Chat bundle');
     document.head.appendChild(s);
@@ -77,13 +74,13 @@ export default function CopilotWebChat({ theme = 'dark' as 'light' | 'dark' }) {
     suggestedActionTextColor: '#FFFFFF'
   }), [theme]);
 
-  // Mount Web Chat when everything is ready
+  // Mount Web Chat when ready
   useEffect(() => {
     if (!ready || !token || !domain || !containerRef.current || !window.WebChat) return;
 
     const directLine = window.WebChat.createDirectLine({ token, domain: `${domain}v3/directline` });
 
-    // Explicitly typed middleware to avoid TS "implicit any" error
+    // Typed middleware (no implicit any)
     const store = window.WebChat.createStore(
       {},
       (store: { dispatch: (a: any) => void }) =>
@@ -94,11 +91,7 @@ export default function CopilotWebChat({ theme = 'dark' as 'light' | 'dark' }) {
               type: 'DIRECT_LINE/POST_ACTIVITY',
               meta: { method: 'keyboard' },
               payload: {
-                activity: {
-                  type: 'event',
-                  name: 'startConversation',
-                  channelData: { postBack: true }
-                }
+                activity: { type: 'event', name: 'startConversation', channelData: { postBack: true } }
               }
             });
           }
