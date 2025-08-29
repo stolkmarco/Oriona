@@ -1,2 +1,2 @@
 import { NextResponse } from 'next/server'
-export async function GET(){ return NextResponse.json({ ok: true, data: 'sales' }) }
+export async function GET(){ return NextResponse.json({ ok: true, ts: Date.now() }) }

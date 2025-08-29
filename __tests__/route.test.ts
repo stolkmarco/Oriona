@@ -1,18 +1,3 @@
 import { describe, it, expect } from 'vitest'
-
-function decideRoute(query: string){
-  const q = query.toLowerCase()
-  const accounts = ['Monzo','Miele','TUI','Samsung','Allianz','IKEA','Revolut','KPN']
-  if (accounts.some(a=>q.includes(a.toLowerCase()))) return 'project'
-  if (/(news|trend|brief|morning)/.test(q)) return 'market'
-  if (/(slide|deck|roi|case|playbook|document|doc|content)/.test(q)) return 'knowledge'
-  if (/(prep|meeting|crm|nudge|call)/.test(q)) return 'sales'
-  return 'knowledge'
-}
-
-describe('decideRoute', ()=>{
-  it('routes account mentions to project', ()=>{ expect(decideRoute('status of Monzo')).toBe('project') })
-  it('routes morning brief to market', ()=>{ expect(decideRoute('morning brief')).toBe('market') })
-  it('routes ROI to knowledge', ()=>{ expect(decideRoute('ROI calculator')).toBe('knowledge') })
-  it('routes prep pack to sales', ()=>{ expect(decideRoute('prep pack')).toBe('sales') })
-})
+function decideRoute(query:string){ const q=query.toLowerCase(); const accounts=['Monzo','Miele','TUI','Samsung','Allianz','IKEA','Revolut','KPN']; if(accounts.some(a=>q.includes(a.toLowerCase()))) return 'project'; if(/(news|trend|brief|morning)/.test(q)) return 'market'; if(/(slide|deck|roi|case|playbook|document|doc|content)/.test(q)) return 'knowledge'; if(/(prep|meeting|crm|nudge|call)/.test(q)) return 'sales'; return 'knowledge' }
+describe('decideRoute', ()=>{ it('routes account mentions to project', ()=>{ expect(decideRoute('status of Monzo')).toBe('project') }); it('routes morning brief to market', ()=>{ expect(decideRoute('morning brief')).toBe('market') }); it('routes ROI to knowledge', ()=>{ expect(decideRoute('ROI calculator')).toBe('knowledge') }); it('routes prep pack to sales', ()=>{ expect(decideRoute('prep pack')).toBe('sales') }) })
