@@ -80,17 +80,32 @@ export default function CopilotWebChat({ theme = 'dark' as 'light' | 'dark' }) {
   // Mount Web Chat when everything is ready
   useEffect(() => {
     if (!ready || !token || !domain || !containerRef.current || !window.WebChat) return;
+
     const directLine = window.WebChat.createDirectLine({ token, domain: `${domain}v3/directline` });
-    const store = window.WebChat.createStore({}, ({ dispatch }) => next => action => {
-      if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
-        dispatch({
-          type: 'DIRECT_LINE/POST_ACTIVITY',
-          meta: { method: 'keyboard' },
-          payload: { activity: { type: 'event', name: 'startConversation', channelData: { postBack: true } } }
-        });
-      }
-      return next(action);
-    });
+
+    // Explicitly typed middleware to avoid TS "implicit any" error
+    const store = window.WebChat.createStore(
+      {},
+      (store: { dispatch: (a: any) => void }) =>
+        (next: (a: any) => any) =>
+        (action: any) => {
+          if (action?.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+            store.dispatch({
+              type: 'DIRECT_LINE/POST_ACTIVITY',
+              meta: { method: 'keyboard' },
+              payload: {
+                activity: {
+                  type: 'event',
+                  name: 'startConversation',
+                  channelData: { postBack: true }
+                }
+              }
+            });
+          }
+          return next(action);
+        }
+    );
+
     const cleanup = () => { if (containerRef.current) containerRef.current.innerHTML = ''; };
     window.WebChat.renderWebChat({ directLine, styleOptions, store }, containerRef.current);
     return cleanup;
