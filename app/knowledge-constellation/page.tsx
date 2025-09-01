@@ -24,7 +24,7 @@ export default function KnowledgeConstellation(){
       <p className="opacity-70 mt-1">Conversational hub for internal content. Upload RFP asks and get suggested collateral.</p>
 
       <div className="mt-6 flex items-center gap-3">
-        <input value={q} onChange={e=> setQ(e.target.value)} placeholder="Search decks, playbooks, ROI models…" className="px-3 py-2 rounded-lg bg-black/5 dark:bg:white/5 dark:bg-white/5 ring-1 ring-black/10 dark:ring-white/10 outline-none w-full" />
+        <input value={q} onChange={e=> setQ(e.target.value)} placeholder="Search decks, playbooks, ROI models…" className="px-3 py-2 rounded-lg bg-black/5 dark:bg-white/5 ring-1 ring-black/10 dark:ring-white/10 outline-none w-full" />
         <button onClick={()=> alert('Upload flow placeholder')} className="px-3 py-2 rounded-lg bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10">Upload</button>
       </div>
 
@@ -37,8 +37,8 @@ export default function KnowledgeConstellation(){
             </div>
             <p className="text-xs mt-2 opacity-70">Tags: {a.tags.join(', ')}</p>
             <div className="mt-3 flex gap-2">
-              <button onClick={()=> alert('Open chat: ask Oriona about relevance')} className="text-sm px-3 py-2 rounded-lg bg-black/5 dark:bg:white/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10">Ask Oriona</button>
-              <button onClick={()=> alert('Added to pitch pack')} className="text-sm px-3 py-2 rounded-lg bg-black/5 dark:bg:white/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10">Add to pack</button>
+              <button onClick={()=> alert('Open chat: ask Oriona about relevance')} className="text-sm px-3 py-2 rounded-lg bg-black/5 dark:bg:white/5 hover:bg-black/10 dark:hover:bg-white/10">Ask Oriona</button>
+              <button onClick={()=> alert('Added to pitch pack')} className="text-sm px-3 py-2 rounded-lg bg-black/5 dark:bg:white/5 hover:bg-black/10 dark:hover:bg-white/10">Add to pack</button>
             </div>
           </div>
         ))}
