@@ -30,13 +30,16 @@ export default function CopilotWebChat({ theme = 'dark' as 'light'|'dark' }){
   useEffect(()=>{
     (async()=>{
       try{
-        const regional = await fetch(getRegionalSettingsURL(TOKEN_ENDPOINT));
+        const regional = await fetch(getRegionalSettingsURL(TOKEN_ENDPOINT), { cache: 'no-store' });
         const j = await regional.json();
         setDomain(j?.channelUrlsById?.directline);
 
-        const r = await fetch('/api/pva-directline/token', { method:'GET' });
+        const r = await fetch('/api/pva-directline/token', { method:'GET', cache: 'no-store' });
         const t = await r.json();
-        if(!t?.token) throw new Error('No token returned');
+        if(!t?.token){
+          const detail = t?.details ? (typeof t.details === 'string' ? t.details.slice(0,300) : JSON.stringify(t.details).slice(0,300)) : 'No token returned';
+          throw new Error(detail);
+        }
         setToken(t.token);
       }catch(e:any){
         setErr(e?.message || 'Initialization failed');
@@ -94,7 +97,7 @@ export default function CopilotWebChat({ theme = 'dark' as 'light'|'dark' }){
     return cleanup;
   },[ready, token, domain, styleOptions]);
 
-  if(err) return <div className="h-full grid place-items-center text-sm opacity-60">{err}</div>;
+  if(err) return <div className="h-full grid place-items-center text-xs text-center opacity-70 p-4 whitespace-pre-wrap">{err}</div>;
   if(!ready || !token || !domain) return <div className="h-full grid place-items-center text-sm opacity-60">Loading…</div>;
   return <div ref={containerRef} className="h-full w-full" />;
 }
