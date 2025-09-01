@@ -47,32 +47,35 @@ export default function CopilotWebChat({ theme = 'dark' as 'light'|'dark' }){
     })();
   },[]);
 
-  const styleOptions = useMemo(()=> ({
-    accent: '#4D3293',
-    subtle: theme==='dark' ? '#a1a1aa' : '#4b5563',
-    primaryFont: 'Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
-    backgroundColor: 'transparent',
-    botAvatarImage: '/tp-logo-white.png',
-    botAvatarBackgroundColor: 'transparent',
-    bubbleBackground: 'rgba(255,255,255,0.06)',
-    bubbleTextColor: '#FFFFFF',
-    bubbleBorderColor: 'rgba(255,255,255,0.08)',
-    bubbleBorderRadius: 14,
-    bubbleBorderWidth: 1,
-    bubbleFromUserBackground: 'rgba(120,0,150,0.30)',
-    bubbleFromUserTextColor: '#FFFFFF',
-    bubbleFromUserBorderColor: 'rgba(255,255,255,0.10)',
-    bubbleFromUserBorderRadius: 14,
-    bubbleFromUserBorderWidth: 1,
-    sendBoxBackground: 'rgba(255,255,255,0.06)',
-    sendBoxTextColor: '#FFFFFF',
-    sendBoxBorderTop: 'solid 1px rgba(255,255,255,0.08)',
-    sendBoxButtonColor: '#4D3293',
-    sendBoxButtonColorOnHover: '#780096',
-    suggestedActionBackgroundColor: '#4D3293',
-    suggestedActionBackgroundColorOnHover: '#780096',
-    suggestedActionTextColor: '#FFFFFF'
-  }),[theme]);
+  const styleOptions = useMemo(()=> {
+    const isDark = theme === 'dark';
+    return {
+      accent: '#4D3293',
+      subtle: isDark ? '#a1a1aa' : '#4b5563',
+      primaryFont: 'Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
+      backgroundColor: 'transparent',
+      botAvatarImage: isDark ? '/tp-logo-white.png' : '/tp-logo-black.png',
+      botAvatarBackgroundColor: 'transparent',
+      bubbleBackground: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)',
+      bubbleTextColor: isDark ? '#FFFFFF' : '#111827',
+      bubbleBorderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)',
+      bubbleBorderRadius: 14,
+      bubbleBorderWidth: 1,
+      bubbleFromUserBackground: isDark ? 'rgba(120,0,150,0.30)' : 'rgba(77,50,147,0.12)',
+      bubbleFromUserTextColor: isDark ? '#FFFFFF' : '#111827',
+      bubbleFromUserBorderColor: isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.10)',
+      bubbleFromUserBorderRadius: 14,
+      bubbleFromUserBorderWidth: 1,
+      sendBoxBackground: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)',
+      sendBoxTextColor: isDark ? '#FFFFFF' : '#111827',
+      sendBoxBorderTop: isDark ? 'solid 1px rgba(255,255,255,0.08)' : 'solid 1px rgba(0,0,0,0.08)',
+      sendBoxButtonColor: '#4D3293',
+      sendBoxButtonColorOnHover: '#780096',
+      suggestedActionBackgroundColor: '#4D3293',
+      suggestedActionBackgroundColorOnHover: '#780096',
+      suggestedActionTextColor: '#FFFFFF'
+    }
+  },[theme]);
 
   useEffect(()=>{
     if(!ready || !token || !domain || !containerRef.current || !window.WebChat) return;

@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root { --tp-indigo: #4D3293; --tp-violet: #780096; }
-
 html, body { height: 100%; }
 body { @apply bg-zinc-50 text-zinc-900 transition-colors duration-300; }
 .dark body { @apply bg-[#0f1220] text-white; }
@@ -15,5 +14,5 @@ body { @apply bg-zinc-50 text-zinc-900 transition-colors duration-300; }
 .widget-hover:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(102,72,204,0.25); }
 
 *::-webkit-scrollbar { width: 8px; height: 8px; }
-*::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 8px; }
-.light *::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); }
+*::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 8px; }
+.dark *::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); }
