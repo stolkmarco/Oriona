@@ -16,7 +16,7 @@ export default function CopilotWebChat({ theme = 'dark' as 'light'|'dark' }){
   const [ready,setReady] = useState(false);
   const [err,setErr] = useState<string>();
 
-  // Load Web Chat CDN bundle
+  // Load CDN bundle
   useEffect(()=>{
     if(typeof window==='undefined') return;
     if(window.WebChat){ setReady(true); return; }
@@ -28,7 +28,7 @@ export default function CopilotWebChat({ theme = 'dark' as 'light'|'dark' }){
     return () => { s.onload = null; s.onerror = null; };
   },[]);
 
-  // Fetch regional domain + token
+  // Fetch regional domain + token (token via API route which POSTs)
   useEffect(()=>{
     (async()=>{
       try{
@@ -36,7 +36,7 @@ export default function CopilotWebChat({ theme = 'dark' as 'light'|'dark' }){
         const j = await regional.json();
         setDomain(j?.channelUrlsById?.directline);
 
-        const r = await fetch(process.env.NEXT_PUBLIC_PVA_TOKEN_ENDPOINT ? '/api/pva-directline/token' : TOKEN_ENDPOINT);
+        const r = await fetch('/api/pva-directline/token', { method:'GET' });
         const t = await r.json();
         if(!t?.token) throw new Error('No token returned');
         setToken(t.token);

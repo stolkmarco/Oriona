@@ -19,10 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }){
               <span className="text-xs opacity-60 ml-2">Agentic AI</span>
             </Link>
             <nav className="flex items-center gap-2 text-sm">
-              <Link href="/(modules)/project-navigator" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Project Navigator</Link>
-              <Link href="/(modules)/market-telescope" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Market Telescope</Link>
-              <Link href="/(modules)/knowledge-constellation" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Knowledge Constellation</Link>
-              <Link href="/(modules)/sales-compass" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Sales Compass</Link>
+              <Link href="/project-navigator" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Project Navigator</Link>
+              <Link href="/market-telescope" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Market Telescope</Link>
+              <Link href="/knowledge-constellation" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Knowledge Constellation</Link>
+              <Link href="/sales-compass" className="px-3 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition">Sales Compass</Link>
             </nav>
             <ThemeToggle />
           </div>
